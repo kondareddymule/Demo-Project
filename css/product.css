@@ -1,0 +1,496 @@
+ .product-container {
+    display: flex;
+    flex-direction: row;
+}
+.filter-container {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+/* Adjust button styles */
+.add {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 6px;
+}
+
+.tabledata {
+    overflow: auto !important;
+}
+/* Ensure the table cells allow for ellipsis */
+#productTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed; /* Ensures columns use defined widths */
+}
+
+#productTable th,
+#productTable td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    white-space: nowrap;        /* Prevent text wrapping */
+    overflow: hidden;           /* Hide overflow content */
+    text-overflow: ellipsis;    /* Show ellipsis when text overflows */
+    max-width: 150px;
+    width: 50px;           /* Set max width for cells */
+}
+
+#productTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Tooltip container style */
+.tooltip-container {
+    position: absolute;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    z-index: 1000;
+    max-width: 250px; /* Optional: control max width of tooltip */
+    white-space: normal; /* Allow wrapping if needed */
+    pointer-events: none; /* Disable interaction with tooltip */
+}
+
+.action-col {
+    text-align: center;
+}
+
+.view-btn {
+    border: 0px;
+    border-radius: 6px;
+    margin-right: 5px;
+    background-color: white;
+    cursor: pointer;
+}
+.edit-btn {
+    border: 0px;
+    border-radius: 6px;
+    margin-right: 5px;
+    background-color: white;
+    cursor: pointer;
+}
+.delete-btn {
+    border: 0px;
+    border-radius: 6px;
+    margin-right: 5px;
+    background-color: white;
+    cursor: pointer;
+}
+.delete-button {
+    color: white;
+    height: 40px;
+    border: 0px;
+    border-radius: 10px;
+    background-color: rgb(248, 11, 3);
+    cursor: pointer;
+}
+#productTable tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light gray background color for even rows */
+}
+#productTable tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* White background for odd rows */
+}
+
+.active-status {
+    color: rgb(8, 244, 8);
+}
+.draft-status {
+    color: #e99c0d;
+}
+.delivered-status {
+    color: blue;
+}
+.cancelled-status {
+    color: red;
+}
+.shipped-status {
+    color: rgb(50, 12, 219);
+}
+
+
+#searchInput {
+    border-radius: 6px;
+    height: 34px;
+}
+.filter {
+    height: 34px;
+    width: auto;
+    border-radius: 6px;
+}
+
+.no-products-message {
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    color: rgb(248, 11, 3);
+    font-weight: bold;
+    padding: 10px;
+    border-left: 0.1px solid rgb(207, 201, 201);
+    border-right: 0.1px solid rgb(207, 201, 201);
+    border-bottom: 0.1px solid rgb(207, 201, 201);
+    border-top: none;
+    background-color: #f2f2f2;
+
+}
+
+
+.action-btns {
+    display: none;
+}
+
+.action-btns.active {
+    display: block;
+    cursor: pointer;
+    color: white;
+    padding: 10px;
+    border: none;
+    font-size: 16px;
+    text-align: center;
+}
+
+.full-span {
+    text-align: center;
+    background-color: #f44336;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+
+
+/* Modal Styles */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 10px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 2.5% auto; 
+    padding: 10px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.close {
+    color: hsla(0, 87%, 3%, 0.855);
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #fa2e0a;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Form Styles */
+.product-form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.side {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.side div {
+    flex: 1;
+}
+
+.side div:last-child {
+    margin-right: 0;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 3px;
+    font-size: 12px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="datetime-local"],
+select {
+    width: 80%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-bottom: 1px solid #f44336;
+    border-radius: 6px;
+    box-sizing: border-box;
+    margin-bottom: 2px;
+    font-size: 10px;
+}
+
+
+textarea {
+    resize: vertical;
+    width: 90%;
+    border-bottom: 1px solid #f44336;
+    border-radius: 6px;
+}
+
+.save-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: #14ec6a;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.save-btn:hover {
+    background-color: #45a049;
+}
+
+.save-btn[style*="background-color: red"] {
+    background-color: red;
+}
+
+.save-btn[style*="background-color: red"]:hover {
+    background-color: darkred;
+}
+
+.required {
+    color: rgb(248, 11, 3);
+}
+
+
+
+/* Medium devices */
+
+
+@media (min-width: 1440px) and (max-width: 2560px) {
+    .modal-content {
+        width: 25%
+    }
+    textarea {
+        width: 90%;
+        margin-bottom: 6px;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select {
+        margin-bottom: 6px;
+    }
+}
+ @media (min-width: 1024px) and (max-width: 1440px) {
+    .modal-content {
+        width: 40%;
+    }
+    textarea {
+        width: 90%;
+        margin-bottom: 6px;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select {
+        margin-bottom: 6px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .modal-content {
+        width: 50%
+    }
+    textarea {
+        width: 89%;
+        margin-bottom: 6px;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select {
+        margin-bottom: 6px;
+    }
+    
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .modal-content {
+        width: 60%
+    }
+    textarea {
+        width: 88%;
+    }
+    
+}
+
+@media screen and (max-width: 480px) {
+    .side {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 4px;
+    }
+    textarea {
+        width: 77%;
+    }
+    .modal-content {
+        width: 80%
+    }
+        .modal-content {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 80%;
+            height: 90%;
+            margin-left: 20px;
+        }
+    
+        .modal-content h2 {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+    
+        .save-btn {
+            position: fixed; 
+            bottom: 10px; 
+            left: 30%; 
+            transform: translateX(-50%); 
+            z-index: 1;
+            margin-bottom: 50px;
+        }
+        #cancelAdd { 
+            position: fixed; 
+            bottom: 10px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            z-index: 1; 
+            margin-bottom: 50px;
+        }
+        #closeEdit {
+            position: fixed; 
+            bottom: 10px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            z-index: 1; 
+            margin-bottom: 50px;
+        }
+    
+        #addProductForm {
+            position: absolute;
+            top: 60px; /* Adjust based on the height of your header */
+            bottom: 80px; /* Adjust based on the height of your buttons */
+            width: 100%;
+            overflow-y: auto;
+            padding: 0 10px; /* Optional: Add some padding */
+        }
+        #editProductForm {
+            position: absolute;
+            top: 60px; /* Adjust based on the height of your header */
+            bottom: 80px; /* Adjust based on the height of your buttons */
+            width: 100%;
+            overflow-y: auto;
+            padding: 0 10px; /* Optional: Add some padding */
+        }
+        #viewProductForm {
+            position: absolute;
+            top: 60px; /* Adjust based on the height of your header */
+            bottom: 80px; /* Adjust based on the height of your buttons */
+            width: 100%;
+            overflow-y: auto;
+            padding: 0 10px; /* Optional: Add some padding */
+        }
+        #viewpic {
+            width: 80% !important;
+            height: 95% !important;
+        }
+        
+    }
+    
+
+
+  
+  /* The Close Button */
+  .close-btn {
+    color: rgb(248, 11, 3);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    border-radius: 10px;
+  }
+  
+  .close-btn:hover,
+  .close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+
+  .confirm-btn, .cancel-btn {
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  
+  .confirm-btn {
+    background-color: rgb(248, 11, 3); /* Red color */
+    color: white;
+  }
+  
+  .cancel-btn {
+    background-color: #14ec6a; /* Light blue color */
+    color: white;
+  }
+  
+  .confirm-btn:hover, .cancel-btn:hover {
+    opacity: 0.8;
+  }
+  
+  #searchInput::-webkit-search-cancel-button {
+    visibility: visible;
+  }
+

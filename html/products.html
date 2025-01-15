@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/product.css">
+    <title>Product Management System</title>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <p class="title">Product Management</p>
+        <div class="menu-container">
+            <div class="menu"> 
+                <a class="links" href="index.html">
+                    <i class="fa fa-bars icon"></i>Dashboard</a> 
+            </div>
+            <div class="menu"> 
+                <a class="links" href="products.html">
+                    <i class="fa fa-shopping-cart icon"></i>
+                    Products
+                </a> 
+            </div>
+            <div class="menu"> 
+                <a class="links" href="gallery.html">
+                    <i class="fa fa-camera-retro icon"></i>
+                    Gallery
+                </a> 
+            </div>
+        </div>
+        <div class="footer">
+            <div class="social-icons">
+                <a href="https://www.instagram.com" class="social-icon" target="_blank" style="color: #E4405F;">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com" class="social-icon" target="_blank" style="color: #1877F2;">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.twitter.com" class="social-icon" target="_blank" style="color: #1DA1F2;">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com" class="social-icon" target="_blank" style="color: #0077B5;">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+            <p class="copyright">Copy rights @ITOrizon</p>
+        </div>      
+    </div>
+    <div class="container">
+        <div class="menu-icon" onclick="toggleSidebar()">
+            <i class="fa fa-bars"></i>
+        </div>
+        <div class="dashboard">
+            <p>Products</p>
+        </div>
+        <div class="product-container">
+            <div class="filter-container">
+                <input type="search" id="searchInput" placeholder="Search by Order Id" aria-label="Search by Product Id">  
+                <span style="margin-right: 10px;">Filter</span> 
+                <select id="filterByActions" class="filter">
+                    <option value="All">All</option>
+                    <option value="Active">Active</option>
+                    <option value="Draft">Draft</option>
+                    <option value="Cancelled">Cancelled</option>
+                    <option value="Delivered">Delivered</option>
+                    <option value="Shipped">Shipped</option>
+                </select>
+                <button id="addProductBtn" class="add" aria-label="Add Product">Add Product</button>
+            </div>
+        </div>
+        <div class="tabledata">
+            <table id="productTable"> 
+                <thead> 
+                    <tr> 
+                        <th style="width: 20px; text-align: left;"><input type="checkbox" id="select-all" onclick="selectAll()"></th>
+                        <th>Order Id</th> 
+                        <th>Name</th> 
+                        <th>Title</th> 
+                        <th>Description</th> 
+                        <th>Price</th> 
+                        <th>Status</th> 
+                        <th>Vendor Name</th>
+                        <th>Type</th>
+                        <th>Address</th>
+                        <th class="action-col" style="width: 100px;">Action</th>
+                    </tr>
+                </thead> 
+                <tbody> 
+                </tbody> 
+            </table>
+        </div>
+    </div>
+    
+    <div id="action-bar" class="action-btns">
+        <button class="delete-button" id="delete-selected" onclick="deleteSelectedItems()">Delete Selected</button>
+    </div>
+
+    <div class="tooltip-container" id="tooltip"></div>
+
+
+        <!-- Add Product Modal -->
+        <div id="addProductModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeAdd">&times;</span>
+                <h2>Add Product</h2>
+                <form id="addProductForm" class="product-form" aria-labelledby="productModal">
+                    <div class="side">
+                        <div>
+                            <label for="productId">Id<span class="required">*</span></label>
+                            <input type="text" id="productId" name="productId" required> <br>
+                        </div>
+                        <div>
+                            <label for="productName">Product Name<span class="required">*</span></label>
+                            <input type="text" id="productName" name="productName" required> <br>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="productDescription">Description<span class="required">*</span></label>
+                        <textarea id="productDescription" name="productDescription" required></textarea> <br>
+                    </div>
+                    <div class="side">
+                        <div>
+                            <label for="productTitle">Title<span class="required">*</span></label>
+                            <input type="text" id="productTitle" name="productTitle" required> <br>
+                        </div>
+                        <div>
+                            <label for="productPrice">Price<span class="required">*</span></label>
+                            <input type="number" id="productPrice" name="productPrice" required step="any"> <br>
+                        </div>
+                    </div>
+                    <div class="side">
+                        <div>
+                            <label for="vendorName">Vendor Name<span class="required">*</span></label>
+                            <input type="text" id="vendorName" name="vendorName" required> <br>
+                        </div>
+                        <div>
+                            <label for="productType">Product Type<span class="required">*</span></label>
+                            <input type="text" id="productType" name="productType" required><br>
+                        </div>
+                    </div>
+                    <div class="side">
+                        <div>
+                            <label for="salePrice">Sale Price<span class="required">*</span></label>
+                            <input type="number" id="salePrice" name="salePrice" required step="any"> <br>
+                        </div>
+                        <div>
+                            <label for="buyingPrice">Buying Price<span class="required">*</span></label>
+                            <input type="number" id="buyingPrice" name="buyingPrice" required step="any"> <br>
+                        </div>
+                    </div>
+                    <div class="side">
+                        <div class="status">
+                            <label for="productStatus" style="margin-right: 140px;">Status<span class="required">*</span></label>
+                            <select id="productStatus" name="productStatus" required>
+                                <option value="Active">Active</option>
+                                <option value="Cancelled">Cancelled</option>
+                                <option value="Draft">Draft</option>
+                                <option value="Delivered">Delivered</option>
+                                <option value="Shipped">Shipped</option>
+                            </select> <br>
+                        </div>
+                        <div>
+                            <label for="availableQuantity">Available Quantity<span class="required">*</span></label>
+                            <input type="number" id="availableQuantity" name="availableQuantity" required> <br>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="address">Address<span class="required">*</span></label>
+                        <textarea type="text" id="address" name="address" required> </textarea><br>
+                    </div>
+                    <div class="side">
+                        <div>
+                            <label for="createdDateTime">Created Date Time</label>
+                            <input type="text" id="createdDateTime" name="createdDateTime" readonly> <br>
+                        </div>
+                        <div>
+                            <label for="modifiedDateTime">Modified Date Time</label>
+                            <input type="text" id="modifiedDateTime" name="modifiedDateTime" readonly> <br>
+                        </div>
+                    </div>
+                    <div class="side">
+                        <div>
+                            <label for="deliveredDate">Delivery Date</label>
+                            <input type="datetime-local" id="deliveredDate" name="deliveredDate"> <br>
+                        </div>
+                        <div>
+                            <label for="productImage">Product Image</label>
+                            <input type="file" id="productImage" name="productImage" accept="image/*"> <br>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <button type="submit" class="save-btn">Save</button>
+                        <button type="button" class="save-btn" style="margin-left: 20px; background-color: red" id="cancelAdd">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Edit Product Modal -->
+            <div id="editProductModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="close">&times;</span>
+                    <h2>Edit Product</h2>
+                    <form id="editProductForm" class="product-form" aria-labelledby="productModal">
+                        <div class="side">
+                            <div>
+                                <label for="editProductId">Id<span class="required">*</span></label>
+                                <input type="text" id="editProductId" name="productId" readonly> <br>
+                            </div>
+                            <div>
+                                <label for="editProductName">Product Name<span class="required">*</span></label>
+                                <input type="text" id="editProductName" name="productName" required> <br>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="editProductDescription">Description<span class="required">*</span></label>
+                            <textarea id="editProductDescription" name="productDescription" required></textarea> <br>
+                        </div>
+                        <div class="side">
+                            <div>
+                                <label for="editProductTitle">Title<span class="required">*</span></label>
+                                <input type="text" id="editProductTitle" name="productTitle" required> <br>
+                            </div>
+                            <div>
+                                <label for="editProductPrice">Price<span class="required">*</span></label>
+                                <input type="number" id="editProductPrice" name="productPrice" required step="any"> <br>
+                            </div>
+                        </div>
+                        <div class="side">
+                            <div>
+                                <label for="editVendorName">Vendor Name<span class="required">*</span></label>
+                                <input type="text" id="editVendorName" name="vendorName" required> <br>
+                            </div>
+                            <div>
+                                <label for="editProductType">Product Type<span class="required">*</span></label>
+                                <input type="text" id="editProductType" name="productType" required><br>
+                            </div>
+                        </div>
+                        <div class="side">
+                            <div>
+                                <label for="editSalePrice">Sale Price<span class="required">*</span></label>
+                                <input type="number" id="editSalePrice" name="salePrice" required step="any"> <br>
+                            </div>
+                            <div>
+                                <label for="editBuyingPrice">Buying Price<span class="required">*</span></label>
+                                <input type="number" id="editBuyingPrice" name="buyingPrice" required step="any"> <br>
+                            </div>
+                        </div>
+                        <div class="side">
+                            <div class="status">
+                                <label for="editProductStatus" style="margin-right: 140px;">Status<span class="required">*</span></label>
+                                <select id="editProductStatus" name="productStatus" required>
+                                    <option value="Active">Active</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                    <option value="Draft">Draft</option>
+                                    <option value="Delivered">Delivered</option>
+                                    <option value="Shipped">Shipped</option>
+                                </select> <br>
+                            </div>
+                            <div>
+                                <label for="editAvailableQuantity">Available Quantity<span class="required">*</span></label>
+                                <input type="number" id="editAvailableQuantity" name="availableQuantity" required> <br>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="editAddress">Address<span class="required">*</span></label>
+                            <textarea type="text" id="editAddress" name="address" required> </textarea><br>
+                        </div>
+                        <div class="side">
+                            <div>
+                                <label for="editCreatedDateTime">Created Date Time</label>
+                                <input type="text" id="editCreatedDateTime" name="createdDateTime" readonly> <br>
+                            </div>
+                            <div>
+                                <label for="editModifiedDateTime">Modified Date Time</label>
+                                <input type="text" id="editModifiedDateTime" name="modifiedDateTime" readonly> <br>
+                            </div>
+                        </div>
+                        <div class="side">
+                            <div>
+                                <label for="editDeliveredDate">Delivery Date</label>
+                                <input type="datetime-local" id="editDeliveredDate" name="deliveredDate"> <br>
+                            </div>
+                            <div>
+                                <label for="editProductImage">Product Image</label>
+                                <input type="file" id="editProductImage" name="productImage" accept="image/*"> <br>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: center;">
+                            <button type="submit" class="save-btn">Save</button>
+                            <button type="button" class="save-btn" style="margin-left: 20px; background-color: red" id="closeEdit">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <!-- view Product Modal -->
+                <div id="viewProductModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" id="closeView">&times;</span>
+                        <h2>View Product</h2>
+                        <form id="viewProductForm" class="product-form" aria-labelledby="productModal">
+                            <div class="side">
+                                <div id="viewImage">
+                                </div>
+                                <div>
+                                    <label for="viewProductId">Id<span class="required">*</span></label>
+                                    <input type="text" id="viewProductId" name="productId" readonly> <br>
+                                </div>
+                            </div>
+                            <div class="side">
+                                <div>
+                                    <label for="viewProductName">Product Name<span class="required">*</span></label>
+                                    <input type="text" id="viewProductName" name="productName" readonly> <br>
+                                </div>
+                                <div>
+                                    <label for="viewProductTitle">Title<span class="required">*</span></label>
+                                    <input type="text" id="viewProductTitle" name="productTitle" readonly> <br>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="viewProductDescription">Description<span class="required">*</span></label>
+                                <textarea id="viewProductDescription" name="productDescription" readonly></textarea> <br>
+                            </div>
+                            <div class="side">
+                                <div>
+                                    <label for="viewVendorName">Vendor Name<span class="required">*</span></label>
+                                    <input type="text" id="viewVendorName" name="vendorName" readonly> <br>
+                                </div>
+                                <div>
+                                    <label for="viewProductType">Product Type<span class="required">*</span></label>
+                                    <input type="text" id="viewProductType" name="productType" readonly><br>
+                                </div>
+                            </div>
+                            <div class="side">
+                                <div>
+                                    <label for="viewSalePrice">Sale Price<span class="required">*</span></label>
+                                    <input type="number" id="viewSalePrice" name="salePrice" readonly> <br>
+                                </div>
+                                <div>
+                                    <label for="viewBuyingPrice">Buying Price<span class="required">*</span></label>
+                                    <input type="number" id="viewBuyingPrice" name="buyingPrice" readonly> <br>
+                                </div>
+                            </div>
+                            <div class="side">
+                                <div class="status">
+                                    <label for="viewProductStatus" style="margin-right: 140px;">Status<span class="required">*</span></label>
+                                    <select id="viewProductStatus" name="productStatus" readonly>
+                                        <option value="Active">Active</option>
+                                        <option value="Cancelled">Cancelled</option>
+                                        <option value="Draft">Draft</option>
+                                        <option value="Delivered">Delivered</option>
+                                        <option value="Shipped">Shipped</option>
+                                    </select> <br>
+                                </div>
+                                <div>
+                                    <label for="viewAvailableQuantity">Available Quantity<span class="required">*</span></label>
+                                    <input type="number" id="viewAvailableQuantity" name="availableQuantity" readonly> <br>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="viewAddress">Address<span class="required">*</span></label>
+                                <textarea type="text" id="viewAddress" name="address" readonly></textarea> <br>
+                            </div>
+                            <div class="side">
+                                <div>
+                                    <label for="viewCreatedDateTime">Created Date Time</label>
+                                    <input type="text" id="viewCreatedDateTime" name="createdDateTime" readonly> <br>
+                                </div>
+                                <div>
+                                    <label for="viewModifiedDateTime">Modified Date Time</label>
+                                    <input type="text" id="viewModifiedDateTime" name="modifiedDateTime" readonly> <br>
+                                </div>
+                            </div>
+                            <div class="side">
+                                <div>
+                                    <label for="viewProductPrice">Price<span class="required">*</span></label>
+                                    <input type="number" id="viewProductPrice" name="productPrice" readonly> <br>
+                                </div>
+                                <div>
+                                    <label for="viewDeliveredDate">Delivery Date</label>
+                                    <input type="text" id="viewDeliveredDate" name="deliveredDate" readonly> <br>
+                                </div>
+                            </div>
+                        </form>
+                            <div style="display: flex; justify-content: center;"> 
+                                <button type="button" class="save-btn" style="background-color: red" id="cancelView">Cancel</button> 
+                            </div>
+                    </div>
+                </div>
+
+                  <!-- Delete Functionality-->
+                   
+                  
+                  <div id="deleteConfirmationModal" class="modal">
+                    <div class="modal-content" style="padding-left: 40px;">
+                      <span class="close-btn" id="cancelDeleteBtn">&times;</span>
+                      <h2>Confirm Deletion</h2>
+                      <p>Are you sure you want to delete this product?</p>
+                      <label>
+                        <input type="checkbox" id="confirmDelete"> Yes, I am sure
+                      </label>
+                      <br>
+                      <button id="confirmDeleteBtn" class="confirm-btn">Delete</button>
+                      <button id="cancelDeleteBtn" class="cancel-btn">Cancel</button>
+                    </div>
+                  </div>
+                  
+                  
+
+
+
+    <script src="../javascript/product.js"></script>
+</body>
+</html>
