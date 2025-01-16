@@ -305,7 +305,7 @@ textarea {
 /* Medium devices */
 
 
-@media (min-width: 1440px) and (max-width: 2560px) {
+@media (min-width: 1441px) and (max-width: 2560px) {
     .modal-content {
         width: 25%
     }
@@ -318,6 +318,12 @@ textarea {
     input[type="date"],
     select {
         margin-bottom: 6px;
+    }
+    .margin-delete {
+        margin-left: 30%;
+    }
+    .modal-content-delete {
+        width: 20%;
     }
 }
  @media (min-width: 1024px) and (max-width: 1440px) {
@@ -333,6 +339,12 @@ textarea {
     input[type="date"],
     select {
         margin-bottom: 6px;
+    }
+    .margin-delete {
+        margin-left: 30%;
+    }
+    .modal-content-delete {
+        width: 30%;
     }
 }
 
@@ -350,6 +362,12 @@ textarea {
     select {
         margin-bottom: 6px;
     }
+    .margin-delete {
+        margin-left: 30%;
+    }
+    .modal-content-delete {
+        width: 40%;
+    }
     
 }
 
@@ -359,6 +377,12 @@ textarea {
     }
     textarea {
         width: 88%;
+    }
+    .margin-delete {
+        margin-left: 30%;
+    }
+    .modal-content-delete {
+        width: 50%;
     }
     
 }
@@ -444,8 +468,28 @@ textarea {
         #viewpic {
             width: 80% !important;
             height: 95% !important;
+        } 
+        #cancelView {
+            margin-left: 20%;
         }
-        
+        .modal-content-delete {
+            width: 80%;
+        }
+        .modal-delete {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 10px;
+        }
+        .margin-delete {
+            margin-left: 20%;
+        }
     }
     
 
@@ -489,8 +533,25 @@ textarea {
   .confirm-btn:hover, .cancel-btn:hover {
     opacity: 0.8;
   }
-  
-  #searchInput::-webkit-search-cancel-button {
-    visibility: visible;
-  }
+
+.modal-content-delete {
+    background-color: #fefefe;
+    margin: 2.5% auto; 
+    padding: 10px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.modal-delete {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 10px;
+}
 

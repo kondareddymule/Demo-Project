@@ -20,7 +20,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 const products = JSON.parse(localStorage.getItem('Products'));
 
-/// Get references to the DOM elements
 const productsContainer = document.getElementById('products');
 const modal = document.getElementById('modal');
 const closeButton = document.querySelector('.close-btn');
@@ -48,8 +47,7 @@ function renderGallery(products) {
     });
 }
 
-// Function to open modal and display product details
-// Function to open modal and display product details
+
 function openModal(product) {
 
     // Create a div to wrap image and details

@@ -34,8 +34,8 @@ const initialProducts = [
         "Available Quantity": 50,
         "Sale Price": 649,
         "Buying Price": 600.00,
-        "Created Date Time": "1/13/2025, 11:13:48 am",
-        "Modified Date Time": "1/13/2025, 11:13:48 pm",
+        "Created Date Time": "1/13/2025, 11:13:48 AM",
+        "Modified Date Time": "1/13/2025, 11:13:48 PM",
         "Delivery Date": "2025-01-16T18:15",
         "Image": "https://cdn.pixabay.com/photo/2016/11/29/12/30/phone-1869510_1280.jpg"
     },
@@ -52,8 +52,8 @@ const initialProducts = [
         "Available Quantity": 30,
         "Sale Price": 1049,
         "Buying Price": 1000,
-        "Created Date Time": "1/13/2025, 11:13:48 am",
-        "Modified Date Time": "1/13/2025, 11:13:48 pm",
+        "Created Date Time": "1/13/2025, 11:13:48 AM",
+        "Modified Date Time": "1/13/2025, 11:13:48 PM",
         "Delivery Date": "2025-01-16T18:15",
         "Image": "https://cdn.pixabay.com/photo/2016/06/28/05/10/laptop-1483974_1280.jpg"
     },
@@ -70,8 +70,8 @@ const initialProducts = [
         "Available Quantity": 100,
         "Sale Price": 179,
         "Buying Price": 150,
-        "Created Date Time": "1/13/2025, 11:13:48 am",
-        "Modified Date Time": "1/13/2025, 11:13:48 pm",
+        "Created Date Time": "1/13/2025, 11:13:48 AM",
+        "Modified Date Time": "1/13/2025, 11:13:48 PM",
         "Delivery Date": "2025-01-16T18:15",
         "Image": "https://cdn.pixabay.com/photo/2020/09/23/20/27/headphones-5596987_1280.jpg"
     },
@@ -88,8 +88,8 @@ const initialProducts = [
         "Available Quantity": 50,
         "Sale Price": 649,
         "Buying Price": 600,
-        "Created Date Time": "1/13/2025, 11:13:48 am",
-        "Modified Date Time": "1/13/2025, 11:13:48 pm",
+        "Created Date Time": "1/13/2025, 11:13:48 AM",
+        "Modified Date Time": "1/13/2025, 11:13:48 PM",
         "Delivery Date": "2025-01-16T18:15",
         "Image": "https://cdn.pixabay.com/photo/2016/11/29/12/30/phone-1869510_1280.jpg"
     },
@@ -106,8 +106,8 @@ const initialProducts = [
         "Available Quantity": 30,
         "Sale Price": 1049,
         "Buying Price": 1000,
-        "Created Date Time": "1/13/2025, 11:13:48 am",
-        "Modified Date Time": "1/13/2025, 11:13:48 pm",
+        "Created Date Time": "1/13/2025, 11:13:48 AM",
+        "Modified Date Time": "1/13/2025, 11:13:48 PM",
         "Delivery Date": "2025-01-16T18:15",
         "Image": "https://cdn.pixabay.com/photo/2016/06/28/05/10/laptop-1483974_1280.jpg"
     },
@@ -124,8 +124,8 @@ const initialProducts = [
         "Available Quantity": 100,
         "Sale Price": 179,
         "Buying Price": 150,
-        "Created Date Time": "1/13/2025, 11:13:48 am",
-        "Modified Date Time": "1/13/2025, 11:13:48 pm",
+        "Created Date Time": "1/13/2025, 11:13:48 AM",
+        "Modified Date Time": "1/13/2025, 11:13:48 PM",
         "Delivery Date": "2025-01-16T18:15",
         "Image": "https://cdn.pixabay.com/photo/2020/09/23/20/27/headphones-5596987_1280.jpg"
     }
@@ -159,6 +159,7 @@ function renderProducts(products) {
         noProductsMessage.classList.add('no-products-message');
         noProductsMessage.innerText = 'No products to show';
         tableContainer.appendChild(noProductsMessage);
+        selectAllCheckbox.checked = false;
     } else {
         products.forEach(product => {
             const row = document.createElement('tr');
@@ -201,6 +202,7 @@ function renderProducts(products) {
 `;
 
             tableBody.appendChild(row);
+            toggleActionBar()
         });
 
         const tooltipCells = document.querySelectorAll('.tooltip');
@@ -348,6 +350,7 @@ document.getElementById('filterByActions').addEventListener('change', function()
     const searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();
     const filteredProducts = filterProducts(products, selectedStatus, searchTerm);
     renderProducts(filteredProducts);
+    toggleActionBar();
 });
 
 // Event listener for the status filter when it loses focus (blur)
@@ -356,6 +359,7 @@ document.getElementById('filterByActions').addEventListener('blur', function() {
     const searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();
     const filteredProducts = filterProducts(products, selectedStatus, searchTerm);
     renderProducts(filteredProducts);
+    toggleActionBar();
 });
 
 // Event listener for the search input field
@@ -364,6 +368,7 @@ document.getElementById('searchInput').addEventListener('input', function() {
     const selectedStatus = document.getElementById('filterByActions').value;
     const filteredProducts = filterProducts(products, selectedStatus, searchTerm);
     renderProducts(filteredProducts);
+    toggleActionBar();
 });
 
 
@@ -423,7 +428,6 @@ btn.onclick = function() {
     modal.style.display = "block";
 }
 
-// When the user clicks on <span> (x) or the cancel button, close the modal
 span.onclick = function() {
     modal.style.display = "none";
     clearForm();
@@ -454,12 +458,11 @@ function clearForm() {
 document.getElementById("addProductForm").addEventListener("submit", function(event) {
     event.preventDefault();
     
-    // Get price values
     const productPrice = parseFloat(document.getElementById("productPrice").value);
     const salePrice = parseFloat(document.getElementById("salePrice").value);
     const buyingPrice = parseFloat(document.getElementById("buyingPrice").value);
 
-    // Validate price fields (ensure they are positive and not NaN)
+    // Validate price fields
     if (isNaN(productPrice) || productPrice < 0) {
         alert('Please enter a valid positive price for Product Price.');
         return;
@@ -497,13 +500,13 @@ document.getElementById("addProductForm").addEventListener("submit", function(ev
                 Name: document.getElementById("productName").value,
                 Title: document.getElementById("productTitle").value,
                 Description: document.getElementById("productDescription").value,
-                Price: productPrice,
+                Price: productPrice.toFixed(2),
                 Status: document.getElementById("productStatus").value,
                 "Vendor Name": document.getElementById("vendorName").value,
                 "Product type": document.getElementById("productType").value,
                 Address: document.getElementById("address").value,
-                "Sale Price": salePrice,
-                "Buying Price": buyingPrice,
+                "Sale Price": salePrice.toFixed(2),
+                "Buying Price": buyingPrice.toFixed(2),
                 "Available Quantity": document.getElementById("availableQuantity").value,
                 "Created Date Time": document.getElementById("createdDateTime").value,
                 "Modified Date Time": new Date().toLocaleString(),
@@ -720,7 +723,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 hour12: true
             });
 
-            document.getElementById("viewDeliveredDate").value = formattedDeliveredDate.toLocaleLowerCase();
+            document.getElementById("viewDeliveredDate").value = formattedDeliveredDate.toUpperCase();
             document.getElementById("viewProductModal").style.display = "block";
         
             const viewImage = document.getElementById('viewImage');

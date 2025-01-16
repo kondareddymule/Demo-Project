@@ -236,12 +236,16 @@ li {
     .recently-added, .delivered-products {
         width: 40%;
     }
+    .select-delete-button {
+        margin-left: 15%;
+    }
 }
 
 @media (min-width: 1024px) {
     .recently-added, .delivered-products {
         width: 40%;
     }
+
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -267,6 +271,9 @@ li {
     .recently-added, .delivered-products {
         width: 40%;
     }
+    .select-delete-button {
+        margin-left: 20%;
+    }
     
 }
 
@@ -289,6 +296,9 @@ li {
     .recently-added, .delivered-products {
         width: 40%;
     }
+    .select-delete-button {
+        margin-left: 25%;
+    }
     
 }
 
@@ -309,5 +319,8 @@ li {
     }
     .card {
         width: 100%;
+    }
+    .select-delete-button {
+        margin-left: 40%;
     }
 }
